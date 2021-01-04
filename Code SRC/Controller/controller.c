@@ -40,4 +40,9 @@ void turn(int8_t n)
 	 *
 	 * You should also call resetPID before exiting this function so your rat is ready for the next instruction.
 	 */
+
+	setPIDGoalA(n * 310);		//the difference in encoder counts for a 90 degree turn is approximately 310 encoder counts. (as I measured it using live expressions for encoder counts
+	setPIDGoalD(0);
+	while (!PIDdone());		//wait until turn is complete
+	resetPID();				//and then reset
 }

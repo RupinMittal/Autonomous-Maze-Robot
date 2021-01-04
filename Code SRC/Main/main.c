@@ -116,6 +116,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  turn(1);
+
   while (1)
   {
 	left_encoder_counts = getLeftEncoderCounts();		//get the encoder counts on right motor
@@ -123,11 +125,12 @@ int main(void)
 
 	left_PWM = (float) TIM4->CCR2;
 	right_PWM = (float) TIM4->CCR4;
+  }
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+
   /* USER CODE END 3 */
 }
 
