@@ -9,15 +9,14 @@
 #include "motors.h"
 #include "encoders.h"
 #include "pid.h"		//I added this in since it wasn't there before
-#include <stdlib.h>
 
 //global variables (so they show up in Live Expressions debugging interface)
 
-	float kP_distance = 0.3;					//how aggresively we want to respond to distance errors
-	float kD_distance = 0;						//factor for responding to how close we are to reaching our target distance
+	const float kP_distance = 0.3;					//how aggresively we want to respond to distance errors
+	const float kD_distance = 0.2;					//factor for responding to how close we are to reaching our target distance
 
-	float kP_angle = 0.2;						//how aggresively we want to respond to angle errors
-	float kD_angle = 0;							//factor for responding to how close we are to reaching our target angle
+	const float kP_angle = 0.2;						//how aggresively we want to respond to angle errors
+	const float kD_angle = 0.2;						//factor for responding to how close we are to reaching our target angle
 
 	int angleError = 0;							//errors in the angle (in encoder counts)
 	int oldAngleError = 0;						//for calculating kD_angle
@@ -33,7 +32,7 @@
 
 	int count_Error_Zero = 0; 					//keeps track of how many SysTick calls the error has been sufficiently close to zero for
 	const int NUM_ZERO_ERROR_FOR_GOAL = 10; 	//number of calls with close to zero error required for goal to be met
-	const double zero_error = 20; 				//max error that is considered sufficiently close to zero error
+	const double zero_error = 10; 				//max error that is considered sufficiently close to zero error
 	int goal_met = 0; 							//is the goal met of not
 
 	const float MAX_ANGLE_CORRECTION = 0.3;		//maximum correction values
@@ -62,6 +61,9 @@ void resetPID()
 
 	angleCorrection = 0;		//reset corrections
 	distanceCorrection = 0;
+
+	goal_angle = 0;				//reset goals, otherwise it will move twice instead of just once, since PID will reset and it will try to reach goal again since updatePID() is still running
+	goal_distance = 0;
 
 	count_Error_Zero = 0;		//reset values for testing if PID is done
 	goal_met = 0;
@@ -103,8 +105,10 @@ void updatePID()
 	setMotorLPWM(distanceCorrection + angleCorrection);									//set motors to corrected values
 	setMotorRPWM(distanceCorrection - angleCorrection);
 
-	if ((absolute_value(angleError) < zero_error) && (absolute_value(distanceError < zero_error)))			//if error is sufficiently close to zero
+	if ((absolute_value(angleError) < zero_error) && (absolute_value(distanceError) < zero_error))			//if error is sufficiently close to zero
 		count_Error_Zero++;																					//increment number of times the error has been consecutively close to zero
+	else
+		count_Error_Zero = 0;
 	if (count_Error_Zero > NUM_ZERO_ERROR_FOR_GOAL)															//if error has been sufficiently close to zero enough times
 		goal_met = 1;																						//the goal has been met
 }

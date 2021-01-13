@@ -116,7 +116,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  turn(1);
+  move(1);	//something is not working right with doing multiple movements. Just doing one turn or one move is good, but multiple statements does not work. Could have something to do with resetting goals
+  move(1);
+  turn(2);
 
   while (1)
   {
