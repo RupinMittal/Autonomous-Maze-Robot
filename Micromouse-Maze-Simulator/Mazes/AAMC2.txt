@@ -1,0 +1,15 @@
+AAMC1
+6
+xxxxxxxxxxxxx
+x         x x
+x    xxxxxx   x
+x x       x x
+x  xx  xxxx   x
+x   x x   x x
+xxx    xx     x
+x   x     x x
+x  xx  xxxx   x
+x x       x x
+x    xxxxxx   x
+x x         x
+xxxxxxxxxxxxx
