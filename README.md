@@ -12,6 +12,9 @@ To run the code on your micromous, download the MicroMouse-STM32IDE.zip file, an
 so that you have the STM-configured files ready to go. Your robot will need to match the same port connections
 in the schematics.
 
+The test for the robots was a modified verison of the AAMC competition at UCLA where the top right corner is
+considered the end of the maze.
+
 ### Software
 
 The microcontroller used was the STM 32 Microcontoller, so the embedded programs were written in 
