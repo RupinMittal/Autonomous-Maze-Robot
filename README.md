@@ -5,7 +5,7 @@ of the project.
 
 ![maze1](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/RupinM_Maze1.gif)
 ![maze2](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/RupinM_Maze2.gif)
-![maze2](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/Robot-Image)
+![](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/Robot-Image.png)
 
 ## Made with IEEE UCLA
 
