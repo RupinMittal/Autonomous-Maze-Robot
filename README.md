@@ -1,9 +1,11 @@
 # Autonomous Maze Robot
 
-Top right is the end of the maze. See Demo folder for full videos. 
+The top right corner is the end of the maze. See the Demo folder for full videos, and below for an overview
+of the project. 
+
 ![maze1](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/RupinM_Maze1.gif)
 ![maze2](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/RupinM_Maze2.gif)
-
+![maze2](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/Robot-Image)
 
 ## Made with IEEE UCLA
 
