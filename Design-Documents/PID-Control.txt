@@ -1,0 +1,50 @@
+PID Control Design Document
+
+When we want to make our robot go from position A to B, an open control loop is not good enough, 
+because the robot is not perfect and won't move exactly like we expect (maybe too slow, or veers to 
+the side). So we need a feedback loop (closed loop) that adjusts based on errors.
+
+The PID control works like this:
+
+
+Reference           -------> Compare to current position ------> Get the Error ------> PID Controller generates a new input signal ---> Robot Processing ----> New Position
+(our goal position)                                                                                                                                                 |
+        |                                                                                                                                                           |
+        |                                                                                                                                                           |
+        |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+So the PID controller must convert the error value (meters, angles, etc) into a input value that the Robot understands (PWM setting, etc)
+
+(PID)
+Proportional   }
+Intergral      }    ---> These 3 paths describe how the error term is handled by the controller        
+Derivative     }
+
+
+             |--->   Kp       ---|
+Error ----------->   Ki * 1/s ------> values are summed to get the Controller Output
+             |--->   Kd * s   ---|
+
+The K terms are called gains and can be adjusted. By adjusting them, you are changing how sensitive the p or i or d paths are to the error
+
+- The propotional path produces an output proportional to the error (large errors means large output, zero error means zero output)
+- The integral path continually sums up the error and multiplies it by the constant Ki. In the integral path, the output is the area under the curve. The integral 
+  path is used to remove constant/persistent error, because even if the error is small, over time it builds up (area under graph will then increase), and gradually 
+  become significant enough to require correction.
+- The derivative path is related to the rate of change of the error. The slower the error changes, the smaller the derivative path, the faster the error changes, 
+  the larger the derivative path
+
+For our robot, the robot values are change in PWM  and the output is distance travelled. We need some sort of transfer function from PWM change to distance.
+
+First, for this robot, only a PD controller is needed. The integral path is for correcting constant errors (like wind or a tilted road), which is not present in the robot's case.
+
+We don't want the system to oscillate. So if we are trying to travel in a straight line, we are going to have the error where one wheel is slightly faster than 
+the other. We don't want to overshoot our error correction and then have to correct backwards. Instead we want a critically damped systems to that the Kp and Kd terms 
+are aligned such that we reach our desired state (equilibruim ) as fast as possible without overshooting.
+
+If we only used the P path, we would overshoot because if one wheel is faster than other, the robot would quickly veer off. Then, since the error is so large, the robot would 
+turn the other wheel a lot and end up overshooting, then need to correct the other wheel, and so on, resulting in oscillation. So we need the D path. As the robot approaches the straight 
+line (error getting smaller), it should slow down the change in the turning wheel and stop when the error is zero.
+
+The microcontroller on the robot uses a function called SysTick() which is called every millisecond. The implementation for the PD controller will go here. The strategy for tuning 
+the controller will be to initially hold Kd at zero and adjust Kp until oscillation is created. Then Kd will be adjusted until a critically damped system is created

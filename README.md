@@ -7,6 +7,11 @@
 This project is an autononmous maze navigating robot. It was built from scratch with 
 the help of IEEE at UCLA (and my leads Bradley Schulz and Tyler Price).
 
+To see the code, go to Code-SRC.
+To run the code on your micromous, download the MicroMouse-STM32IDE.zip file, and open in the STM32 Cube IDE, 
+so that you have the STM-configured files ready to go. Your robot will need to match the same port connections
+in the schematics.
+
 ### Software
 
 The microcontroller used was the STM 32 Microcontoller, so the embedded programs were written in 
