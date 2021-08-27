@@ -1,6 +1,6 @@
 # Autonomous Maze Robot
 
-![top right is end of maze](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos/RupinM_Micromouse_Maze1.mp4)
+![top right is end of maze](https://github.com/RupinMittal/Autonomous-Maze-Robot/blob/main/Demo-Videos-GIFs/RupinM_Maze2.gif)
 
 
 ## Made with IEEE UCLA
